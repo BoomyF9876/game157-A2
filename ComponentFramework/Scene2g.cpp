@@ -119,15 +119,13 @@ void Scene2g::Render() const {
 
 	if (drawInWireMode) {
 		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-	}
-	else {
+	} else {
 		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 	}
 	glUseProgram(shader->GetProgram());
 	glUniformMatrix4fv(shader->GetUniformID("projectionMatrix"), 1, GL_FALSE, camera->getProjectionMatrix());
 	glUniformMatrix4fv(shader->GetUniformID("viewMatrix"), 1, GL_FALSE, camera->getViewMatrix());
 	glUniform3fv(shader->GetUniformID("lightPos"), 1, lightPos);
-
 
 	glBindTexture(GL_TEXTURE_2D, skullTexture->getTextureID());
 	glUniformMatrix4fv(shader->GetUniformID("modelMatrix"), 1, GL_FALSE, skullModelMatrix);
