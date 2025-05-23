@@ -33,10 +33,10 @@ bool Scene2g::OnCreate() {
 	skullMesh->OnCreate();
 
 	eyeTexture = new Texture();
-	eyeTexture->LoadImage("textures/earthclouds.jpg");
+	eyeTexture->LoadImage("textures/evilEye.jpg");
 
 	skullTexture = new Texture();
-	skullTexture->LoadImage("textures/evilEye.jpg");
+	skullTexture->LoadImage("textures/skull_texture.jpg");
 
 	shader = new Shader("shaders/texturePhongVert.glsl", "shaders/texturePhongFrag.glsl");
 	if (shader->OnCreate() == false) {
@@ -100,12 +100,14 @@ void Scene2g::Update(const float deltaTime) {
 	static float totalTime = 0.0f;
 	totalTime += deltaTime;
 	lEyeModelMatrix =
-		MMath::translate(3.0f, 0.0f, 0.0f) *
+		MMath::translate(0.55f, 0.25f, 1.0f) *
 		MMath::rotate(-90.f, Vec3(0.0f, 1.0f, 0.0f)) *
 		MMath::scale(0.35f, 0.35f, 0.35f);
-
-	//skullModelMatrix =
-
+	rEyeModelMatrix =
+		MMath::translate(-0.55f, 0.25f, 1.0f) *
+		MMath::rotate(-90.f, Vec3(0.0f, 1.0f, 0.0f)) *
+		MMath::scale(0.35f, 0.35f, 0.35f);
+	
 }
 
 void Scene2g::Render() const {
@@ -135,6 +137,9 @@ void Scene2g::Render() const {
 	glUniformMatrix4fv(shader->GetUniformID("modelMatrix"), 1, GL_FALSE, skullModelMatrix * lEyeModelMatrix);
 	eyeMesh->Render(GL_TRIANGLES);
 
+	glBindTexture(GL_TEXTURE_2D, eyeTexture->getTextureID());
+	glUniformMatrix4fv(shader->GetUniformID("modelMatrix"), 1, GL_FALSE, skullModelMatrix * rEyeModelMatrix);
+	eyeMesh->Render(GL_TRIANGLES);
 
 	glBindTexture(GL_TEXTURE_2D, 0);
 	glUseProgram(0);
