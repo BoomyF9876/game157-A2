@@ -20,6 +20,8 @@ public:
 	Camera();
 	~Camera();
 	void Render() const;
+	bool OnCreate();
+	void HandleEvents(const SDL_Event& sdlEvent);
 
 	inline Matrix4 getProjectionMatrix() const { return projection; }
 	inline Matrix4 getViewMatrix() const { return MMath::translate(pos) * MMath::toMatrix4(orientation); }
@@ -27,6 +29,5 @@ public:
 	inline Vec3 getPos() { return pos; }
 	inline void setPos(Vec3 pos_) { pos = -pos_; }
 	inline void setOrientation(Quaternion orientation_) { orientation = orientation_; }
-	inline void HandleEvents(const SDL_Event& sdlEvent);
 };
 

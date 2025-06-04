@@ -21,7 +21,7 @@ Camera::~Camera() {
 
 void Camera::HandleEvents(const SDL_Event& sdlEvent) {
 	trackball.HandleEvents(sdlEvent);
-	trackball.getQuat(orientation);
+	orientation = trackball.getQuat();
 }
 
 void Camera::Render() const {

@@ -11,7 +11,7 @@ out vec3 textureCoords;
 
 
 void main() {
-    textureCoords = vec3(inVertex);
+    textureCoords = vec3(-inVertex.x, inVertex.y, inVertex.z);
 
     gl_Position = projectionMatrix * orientationMatrix * inVertex;
 }

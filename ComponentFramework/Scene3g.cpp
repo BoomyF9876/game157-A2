@@ -71,6 +71,7 @@ void Scene3g::OnDestroy() {
 
 void Scene3g::HandleEvents(const SDL_Event& sdlEvent) {
 	trackball.HandleEvents(sdlEvent);
+	camera->HandleEvents(sdlEvent);
 	skullModelMatrix = MMath::toMatrix4(trackball.getQuat());
 	eyeTrack = MMath::inverse(skullModelMatrix);
 
@@ -136,15 +137,15 @@ void Scene3g::Render() const {
 
 	glBindTexture(GL_TEXTURE_2D, skullTexture->getTextureID());
 	glUniformMatrix4fv(shader->GetUniformID("modelMatrix"), 1, GL_FALSE, skullModelMatrix);
-	skullMesh->Render(GL_TRIANGLES);
+	//skullMesh->Render(GL_TRIANGLES);
 
 	glBindTexture(GL_TEXTURE_2D, eyeTexture->getTextureID());
 	glUniformMatrix4fv(shader->GetUniformID("modelMatrix"), 1, GL_FALSE, skullModelMatrix * lEyeModelMatrix);
-	eyeMesh->Render(GL_TRIANGLES);
+	//eyeMesh->Render(GL_TRIANGLES);
 
 	glBindTexture(GL_TEXTURE_2D, eyeTexture->getTextureID());
 	glUniformMatrix4fv(shader->GetUniformID("modelMatrix"), 1, GL_FALSE, skullModelMatrix * rEyeModelMatrix);
-	eyeMesh->Render(GL_TRIANGLES);
+	//eyeMesh->Render(GL_TRIANGLES);
 
 	glBindTexture(GL_TEXTURE_2D, 0);
 	glUseProgram(0);
