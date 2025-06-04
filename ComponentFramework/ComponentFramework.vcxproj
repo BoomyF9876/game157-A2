@@ -131,10 +131,12 @@
     <ClCompile Include="Scene0p.cpp" />
     <ClCompile Include="Scene1g.cpp" />
     <ClCompile Include="Scene2g.cpp" />
+    <ClCompile Include="Scene3g.cpp" />
     <ClCompile Include="SceneManager.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Scene0g.cpp" />
     <ClCompile Include="Shader.cpp" />
+    <ClCompile Include="Skybox.cpp" />
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="Timer.cpp" />
     <ClCompile Include="Trackball.cpp" />
@@ -148,10 +150,12 @@
     <ClInclude Include="Scene0p.h" />
     <ClInclude Include="Scene1g.h" />
     <ClInclude Include="Scene2g.h" />
+    <ClInclude Include="Scene3g.h" />
     <ClInclude Include="SceneManager.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="Scene0g.h" />
     <ClInclude Include="Shader.h" />
+    <ClInclude Include="Skybox.h" />
     <ClInclude Include="Texture.h" />
     <ClInclude Include="Timer.h" />
     <ClInclude Include="tiny_obj_loader.h" />
@@ -164,6 +168,8 @@
   <ItemGroup>
     <None Include="shaders\defaultFrag.glsl" />
     <None Include="shaders\defaultVert.glsl" />
+    <None Include="shaders\skyboxFrag.glsl" />
+    <None Include="shaders\skyboxVert.glsl" />
     <None Include="texturePhongFrag.glsl" />
     <None Include="texturePhongVert.glsl" />
   </ItemGroup>

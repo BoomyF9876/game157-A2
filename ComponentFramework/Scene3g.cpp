@@ -2,7 +2,7 @@
 #include <iostream>
 #include <SDL.h>
 #include <MMath.h>
-#include "Scene2g.h"
+#include "Scene3g.h"
 #include "Debug.h"
 #include "Mesh.h"
 #include "Shader.h"
@@ -10,16 +10,16 @@
 #include "Texture.h"
 #include "Camera.h"
 
-Scene2g::Scene2g() : mario(nullptr), shader(nullptr), eyeMesh(nullptr),
+Scene3g::Scene3g() : mario(nullptr), shader(nullptr), eyeMesh(nullptr),
 drawInWireMode(false), eyeTexture(nullptr) {
 	Debug::Info("Created Scene0: ", __FILE__, __LINE__);
 }
 
-Scene2g::~Scene2g() {
+Scene3g::~Scene3g() {
 	Debug::Info("Deleted Scene0: ", __FILE__, __LINE__);
 }
 
-bool Scene2g::OnCreate() {
+bool Scene3g::OnCreate() {
 	Debug::Info("Loading assets Scene0: ", __FILE__, __LINE__);
 	camera = new Camera();
 	mario = new Body();
@@ -53,7 +53,7 @@ bool Scene2g::OnCreate() {
 	return true;
 }
 
-void Scene2g::OnDestroy() {
+void Scene3g::OnDestroy() {
 	Debug::Info("Deleting assets Scene0: ", __FILE__, __LINE__);
 	mario->OnDestroy();
 	delete mario;
@@ -69,7 +69,7 @@ void Scene2g::OnDestroy() {
 
 }
 
-void Scene2g::HandleEvents(const SDL_Event& sdlEvent) {
+void Scene3g::HandleEvents(const SDL_Event& sdlEvent) {
 	trackball.HandleEvents(sdlEvent);
 	skullModelMatrix = MMath::toMatrix4(trackball.getQuat());
 	eyeTrack = MMath::inverse(skullModelMatrix);
@@ -97,7 +97,7 @@ void Scene2g::HandleEvents(const SDL_Event& sdlEvent) {
 	}
 }
 
-void Scene2g::Update(const float deltaTime) {
+void Scene3g::Update(const float deltaTime) {
 	static float totalTime = 0.0f;
 	totalTime += deltaTime;
 
@@ -113,16 +113,20 @@ void Scene2g::Update(const float deltaTime) {
 		MMath::scale(0.35f, 0.35f, 0.35f);
 }
 
-void Scene2g::Render() const {
-	glEnable(GL_DEPTH_TEST);
-	glEnable(GL_CULL_FACE);
+void Scene3g::Render() const {
 	/// Set the background color then clear the screen
 	glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
+	camera->Render();
+
+	glEnable(GL_DEPTH_TEST);
+	glEnable(GL_CULL_FACE);
+
 	if (drawInWireMode) {
 		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-	} else {
+	}
+	else {
 		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 	}
 	glUseProgram(shader->GetProgram());

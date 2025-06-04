@@ -1,5 +1,6 @@
-#ifndef SCENE2G_H
-#define SCENE2G_H
+#pragma once
+#ifndef SCENE3G_H
+#define SCENE3G_H
 #include "Scene.h"
 #include <Vector.h>
 #include <Matrix.h>
@@ -15,7 +16,7 @@ class Shader;
 class Texture;
 class Camera;
 
-class Scene2g : public Scene {
+class Scene3g : public Scene {
 private:
 	Trackball trackball;
 	Camera* camera;
@@ -39,8 +40,8 @@ private:
 	Vec3 lightPos;
 
 public:
-	explicit Scene2g();
-	virtual ~Scene2g();
+	explicit Scene3g();
+	virtual ~Scene3g();
 
 	virtual bool OnCreate() override;
 	virtual void OnDestroy() override;
@@ -50,4 +51,4 @@ public:
 };
 
 
-#endif // SCENE2G_H#pragma once
+#endif // SCENE3G_H#pragma once
